@@ -37,7 +37,6 @@ int main()
 
 void Reg()
 {
-    cout << "\n@\n";
     cout << "Enter Username: ";
     cin >> username;
     cout << "\n";
@@ -57,7 +56,6 @@ void Reg()
 
 void Login()
 {
-    cout << "\n@\n";
     cout << "Enter Username: ";
     cin >> username;
     cout << "Enter Password: ";
