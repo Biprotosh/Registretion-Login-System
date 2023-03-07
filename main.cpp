@@ -1,15 +1,20 @@
 #include <iostream>
+#include <fstream>
+#include <string>
+
 using namespace std;
 
 void Reg(void);
 void Login(void);
+
+string username = "", password = "";
 
 int main()
 {
     int input;
     while (true)
     {
-        cout << "\nEnter 1 for Login\nEnter 2 for Registretion\nEnter 0 for Exit\n-> ";
+        cout << "\nEnter 1 for Login\nEnter 2 for Registration\nEnter 0 for Exit\n-> ";
         cin >> input;
         switch (input)
         {
@@ -33,9 +38,28 @@ int main()
 void Reg()
 {
     cout << "\n@\n";
+    cout << "Enter Username: ";
+    cin >> username;
+    cout << "\n";
+    cout << "Enter Password: ";
+    cin >> password;
+    cout << username << endl;
+    cout << password << endl;
+    ofstream reg ("reg.txt");
+    if (reg.is_open())
+    {
+        reg << username << endl;
+        reg << password << endl;
+    }
+    
+    Login();
 }
 
 void Login()
 {
     cout << "\n@\n";
+    cout << "Enter Username: ";
+    cin >> username;
+    cout << "Enter Password: ";
+    cin >> password;
 }
