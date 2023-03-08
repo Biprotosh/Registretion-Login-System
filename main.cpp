@@ -82,12 +82,13 @@ void registerUser()
              << "Enter your Username: ";
         cin >> username;
         checkUser = username;
-        check.open(checkUser.append(".txt"));
-        // cout<<checkUser;
+        checkUser.append(".txt");
+        check.open(checkUser.c_str());
         if (check.is_open())
         {
             cout << "\nUser name is already exist\nPlease enter a different user name"
                  << endl;
+            check.close();
             continue;
         }
 
@@ -95,7 +96,7 @@ void registerUser()
         {
             cout << "Enter your password: ";
             cin >> password;
-            ofstream userFile(username + ".txt");
+            ofstream userFile(checkUser.c_str());
             cout << "\nEnter you credential\n";
             cout << "--------------------\n";
             getchar();
@@ -110,11 +111,13 @@ void registerUser()
             userFile.close();
             check.close();
             cout << "\nUser registered successfully!\nLogin for use features" << endl;
+            check.close();
             break;
         }
         else
         {
             cout << "Something went wrong\n";
+            check.close();
             exit(1);
         }
     }
@@ -122,8 +125,9 @@ void registerUser()
 
 bool checkCredentials(string username, string password)
 {
-    ifstream userFile(username + ".txt");
     string storedPassword;
+    username.append(".txt");
+    ifstream userFile(username.c_str());
 
     if (userFile.is_open())
     {
@@ -138,7 +142,6 @@ bool checkCredentials(string username, string password)
             return true;
         }
     }
-
     userFile.close();
     return false;
 }
