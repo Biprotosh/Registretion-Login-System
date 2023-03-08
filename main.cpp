@@ -38,7 +38,7 @@ void registerUser()
             cin>>phN;
             userFile <<"Name: "<<name<<endl<<"Phone Number: "<<phN<<endl<<"User Name: "<<username<<endl<<"Password: "<<password ;
             userFile.close();
-
+            check.close();
             cout << "\nUser registered successfully!\nLogin for use features" << endl;
             break;
         }
@@ -53,15 +53,15 @@ void registerUser()
 bool checkCredentials(string username, string password)
 {
     ifstream userFile(username + ".txt");
+    string storedPassword;
 
     if (userFile.is_open())
     {
-        string storedUsername, storedPassword;
+        while(!userFile.eof()){
+        userFile>>storedPassword;
+        }        
 
-        getline(userFile, storedUsername);
-        getline(userFile, storedPassword);
-
-        if (storedUsername == username && storedPassword == password)
+        if (!storedPassword.compare(password))
         {
             userFile.close();
             return true;
@@ -84,11 +84,11 @@ void login()
 
     if (checkCredentials(username, password))
     {
-        cout << "Login successful!" << endl;
+        cout << "\nLogin successful!" << endl;
     }
     else
     {
-        cout << "Invalid username or password. Please try again." << endl;
+        cout << "\nInvalid username or password. Please try again." << endl;
     }
 }
 
