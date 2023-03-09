@@ -6,29 +6,50 @@ using namespace std;
 
 class features
 {
+
 public:
     void options(string username);
-    void printInfo(void);
+    void printInfo(string username);
     void changeCredential(void);
     void changeUserPass(void);
     void dltAcc(string username);
 };
 
-void features::printInfo(){
-    cout<<"Under construction\n";
+void features::printInfo(string username)
+{
+    string _PrintingInformation;
+    username.append(".txt");
+    ifstream Print(username.c_str());
+    if(Print.is_open()){
+        cout<<"\nYour Informaition\n";
+        cout<<"------------------\n";
+        while(!Print.eof()){
+            getline(Print,_PrintingInformation);
+            cout<<_PrintingInformation<<endl;
+        }
+        cout<<"------------------\n";
+        Print.close();
+    }
+    else{
+        cout<<"\nFile is not opening\n";
+    }
 }
 
-void features::changeCredential(){
-    cout<<"Under construction\n";
+void features::changeCredential()
+{
+    std::cout << "Under construction\n";
 }
 
-void features::changeUserPass(){
-    cout<<"Under construction\n";
+void features::changeUserPass()
+{
+    std::cout << "Under construction\n";
 }
 
-void features::dltAcc(string username){
-    if(remove(username.append(".txt").c_str())==0){
-        cout<<"\nYour account successfully deleted\n";
+void features::dltAcc(string username)
+{
+    if (remove(username.append(".txt").c_str()) == 0)
+    {
+        std::cout << "\nYour account successfully deleted\n";
     }
 }
 
@@ -37,20 +58,20 @@ void features::options(string username)
     while (true)
     {
         char choice;
-        cout << "\n________________/ OPTIONS \\________________" << endl;
-        cout << "| Click 1 for Printing the information   |" << endl;
-        cout << "| Click 2 for change the credential      |" << endl;
-        cout << "| Click 3 for change username & Password |" << endl;
-        cout << "| Click 4 for logout                     |" << endl;
-        cout << "| Click 5 for Delete your accout         |" << endl;
-        cout << endl
-             << "Enter you choice -> ";
-        cin >> choice;
+        std::cout << "\n________________/ OPTIONS \\________________" << endl;
+        std::cout << "| Click 1 for Printing the information   |" << endl;
+        std::cout << "| Click 2 for change the credential      |" << endl;
+        std::cout << "| Click 3 for change username & Password |" << endl;
+        std::cout << "| Click 4 for logout                     |" << endl;
+        std::cout << "| Click 5 for Delete your Accout         |" << endl;
+        std::cout << endl
+                  << "Enter you choice -> ";
+        std::cin >> choice;
         getchar();
         switch (choice)
         {
         case '1':
-            printInfo();
+            printInfo(username);
             break;
         case '2':
             changeCredential();
@@ -58,14 +79,14 @@ void features::options(string username)
         case '3':
             changeUserPass();
             break;
-        case '4': 
-            cout<<"\nLogout successfully!!\n";    
-            return ;
+        case '4':
+            std::cout << "\nLogout successfully!!\n";
+            return;
         case '5':
             dltAcc(username);
             return;
         default:
-            cout << "\nInvalid choice\n";
+            std::cout << "\nInvalid choice\n";
             break;
         }
     }
@@ -78,45 +99,45 @@ void registerUser()
     ifstream check;
     while (true)
     {
-        cout << endl
-             << "Enter your Username: ";
-        cin >> username;
+        std::cout << endl
+                  << "Enter your Username: ";
+        std::cin >> username;
         checkUser = username;
         checkUser.append(".txt");
         check.open(checkUser.c_str());
         if (check.is_open())
         {
-            cout << "\nUser name is already exist\nPlease enter a different user name"
-                 << endl;
+            std::cout << "\nUser name is already exist\nPlease enter a different user name"
+                      << endl;
             check.close();
             continue;
         }
 
         else if (!check.is_open())
         {
-            cout << "Enter your password: ";
-            cin >> password;
+            std::cout << "Enter your password: ";
+            std::cin >> password;
             ofstream userFile(checkUser.c_str());
-            cout << "\nEnter you credential\n";
-            cout << "--------------------\n";
+            std::cout << "\nEnter you credential\n";
+            std::cout << "--------------------\n";
             getchar();
-            cout << "Name: ";
-            getline(cin, name);
-            cout << "Phone-Number: ";
-            cin >> phN;
+            std::cout << "Name: ";
+            std::getline(std::cin, name);
+            std::cout << "Phone-Number: ";
+            std::cin >> phN;
             userFile << "Name: " << name << endl
                      << "Phone Number: " << phN << endl
                      << "User Name: " << username << endl
                      << "Password: " << password;
             userFile.close();
             check.close();
-            cout << "\nUser registered successfully!\nLogin for use features" << endl;
+            std::cout << "\nUser registered successfully!\nLogin for use features" << endl;
             check.close();
             break;
         }
         else
         {
-            cout << "Something went wrong\n";
+            std::cout << "Something went wrong\n";
             check.close();
             exit(1);
         }
@@ -150,21 +171,21 @@ void login()
 {
     string username, password;
 
-    cout << "Enter your username: ";
-    cin >> username;
+    std::cout << "Enter your username: ";
+    std::cin >> username;
 
-    cout << "Enter your password: ";
-    cin >> password;
+    std::cout << "Enter your password: ";
+    std::cin >> password;
 
     if (checkCredentials(username, password))
     {
-        cout << "\nLogged in successfully!" << endl;
+        std::cout << "\nLogged in successfully!" << endl;
         features show;
         show.options(username);
     }
     else
     {
-        cout << "\nInvalid username or password. Please try again." << endl;
+        std::cout << "\nInvalid username or password. Please try again." << endl;
     }
 }
 
@@ -174,15 +195,15 @@ int main()
     char choice;
     while (true)
     {
-        cout << endl
-             << "------------------" << endl;
-        cout << "| 1 for Register |" << endl;
-        cout << "| 2 for Login    |" << endl;
-        cout << "| 3 for Exit     |" << endl;
-        cout << "------------------" << endl;
-        cout << "Enter your choice -> ";
-        cin >> choice;
-        // cout<<choice<<endl;
+        std::cout << endl
+                  << "------------------" << endl;
+        std::cout << "| 1 for Register |" << endl;
+        std::cout << "| 2 for Login    |" << endl;
+        std::cout << "| 3 for Exit     |" << endl;
+        std::cout << "------------------" << endl;
+        std::cout << "Enter your choice -> ";
+        std::cin >> choice;
+        // std::cout<<choice<<endl;
         getchar(); // For consume the new line character
         switch (choice)
         {
@@ -193,12 +214,12 @@ int main()
             login();
             break;
         case '3':
-            cout << endl
-                 << "Goodbye!" << endl;
+            std::cout << endl
+                      << "Goodbye!" << endl;
             exit(0);
         default:
-            cout << endl
-                 << "Invalid choice. Please try again." << endl;
+            std::cout << endl
+                      << "Invalid choice. Please try again." << endl;
             continue;
         }
     }
