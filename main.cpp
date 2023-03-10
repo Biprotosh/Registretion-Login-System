@@ -101,7 +101,8 @@ void registerUser()
     {
         std::cout << endl
                   << "Enter your Username: ";
-        std::cin >> username;
+        std::getline(std::cin, username);
+        cin.sync();
         checkUser = username;
         checkUser.append(".txt");
         check.open(checkUser.c_str());
@@ -117,14 +118,16 @@ void registerUser()
         {
             std::cout << "Enter your password: ";
             std::cin >> password;
+            cin.sync();
             ofstream userFile(checkUser.c_str());
             std::cout << "\nEnter you credential\n";
             std::cout << "--------------------\n";
-            getchar();
             std::cout << "Name: ";
             std::getline(std::cin, name);
+            cin.sync();
             std::cout << "Phone-Number: ";
             std::cin >> phN;
+            cin.sync();
             userFile << "Name: " << name << endl
                      << "Phone Number: " << phN << endl
                      << "User Name: " << username << endl
@@ -172,10 +175,11 @@ void login()
     string username, password;
 
     std::cout << "Enter your username: ";
-    std::cin >> username;
-
+    std::getline(std::cin, username);
+    cin.sync();
     std::cout << "Enter your password: ";
     std::cin >> password;
+    cin.sync();
 
     if (checkCredentials(username, password))
     {
@@ -203,8 +207,7 @@ int main()
         std::cout << "------------------" << endl;
         std::cout << "Enter your choice -> ";
         std::cin >> choice;
-        // std::cout<<choice<<endl;
-        getchar(); // For consume the new line character
+        cin.sync(); // For clear the input buffer
         switch (choice)
         {
         case '1':
