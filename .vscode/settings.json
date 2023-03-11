@@ -4,6 +4,23 @@
     "xstring": "cpp",
     "fstream": "cpp",
     "iosfwd": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "iostream": "cpp",
+    "ostream": "cpp",
+    "ios": "cpp",
+    "istream": "cpp",
+    "new": "cpp",
+    "typeinfo": "cpp",
+    "utility": "cpp",
+    "xiosbase": "cpp",
+    "xlocale": "cpp",
+    "xlocinfo": "cpp",
+    "xlocnum": "cpp",
+    "xmemory": "cpp",
+    "xstddef": "cpp",
+    "xutility": "cpp",
+    "exception": "cpp",
+    "stdexcept": "cpp",
+    "streambuf": "cpp"
   }
 }

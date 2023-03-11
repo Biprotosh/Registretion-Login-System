@@ -10,7 +10,7 @@ class features
 public:
     void options(string username);
     void printInfo(string username);
-    void changeCredential(void);
+    void changeCredential(string username);
     void changeUserPass(void);
     void dltAcc(string username);
 };
@@ -20,24 +20,61 @@ void features::printInfo(string username)
     string _PrintingInformation;
     username.append(".txt");
     ifstream Print(username.c_str());
-    if(Print.is_open()){
-        cout<<"\nYour Informaition\n";
-        cout<<"------------------\n";
-        while(!Print.eof()){
-            getline(Print,_PrintingInformation);
-            cout<<_PrintingInformation<<endl;
+    if (Print.is_open())
+    {
+        cout << "\nYour Informaition\n";
+        cout << "------------------\n";
+        while (!Print.eof())
+        {
+            getline(Print, _PrintingInformation);
+            cout << _PrintingInformation << endl;
         }
-        cout<<"------------------\n";
+        cout << "------------------\n";
         Print.close();
     }
-    else{
-        cout<<"\nFile is not opening\n";
+    else
+    {
+        cout << "\nFile is not opening\n";
     }
 }
 
-void features::changeCredential()
+void features::changeCredential(string username)
 {
-    std::cout << "Under construction\n";
+    string INFO1, INFO2, INFO3, INFO4;
+    ifstream Read;
+    ofstream Write;
+    Read.open((username + ".txt").c_str());
+    if (Read.is_open())
+    {
+        getline(Read, INFO1);
+        getline(Read, INFO2);
+        getline(Read, INFO3);
+        getline(Read, INFO4);
+        Read.close();
+    }
+    else
+    {
+        cout << "\nSomething went wrong\n";
+    }
+
+    Write.open((username + ".txt").c_str());
+    if (Write.is_open())
+    {
+        cout << "Enter you name: ";
+        getline(cin, INFO1);
+        cout << "Enter your Phone-Number: ";
+        getline(cin, INFO2);
+        Write << "Name: " << INFO1 << endl;
+        Write << "Phone Number: " << INFO2 << endl;
+        Write << INFO3 << endl;
+        Write << INFO4 << endl;
+        cout << "\nYour Credential has been changed\n";
+        Write.close();
+    }
+    else
+    {
+        cout << "\nSomething went wrong\n";
+    }
 }
 
 void features::changeUserPass()
@@ -51,6 +88,10 @@ void features::dltAcc(string username)
     {
         std::cout << "\nYour account successfully deleted\n";
     }
+    else
+    {
+        std::cout << "\nSome thing went wrong\n";
+    }
 }
 
 void features::options(string username)
@@ -58,7 +99,7 @@ void features::options(string username)
     while (true)
     {
         char choice;
-        std::cout << "\n________________/ OPTIONS \\________________" << endl;
+        std::cout << "\n_______________/ OPTIONS \\________________" << endl;
         std::cout << "| Click 1 for Printing the information   |" << endl;
         std::cout << "| Click 2 for change the credential      |" << endl;
         std::cout << "| Click 3 for change username & Password |" << endl;
@@ -74,7 +115,7 @@ void features::options(string username)
             printInfo(username);
             break;
         case '2':
-            changeCredential();
+            changeCredential(username);
             break;
         case '3':
             changeUserPass();
@@ -104,6 +145,11 @@ void registerUser()
         std::getline(std::cin, username);
         cin.sync();
         checkUser = username;
+        if (checkUser.length() < 5 || checkUser.length() > 14)
+        {
+            cout << "\nYour Username must be under 5 to 14 characters\n";
+            continue;
+        }
         checkUser.append(".txt");
         check.open(checkUser.c_str());
         if (check.is_open())
@@ -116,8 +162,17 @@ void registerUser()
 
         else if (!check.is_open())
         {
-            std::cout << "Enter your password: ";
-            std::cin >> password;
+            while (true)
+            {
+                std::cout << "Enter your password: ";
+                std::cin >> password;
+                if (password.length() < 4 || password.length() > 10)
+                {
+                    cout << "\nYour Password must be under 4 to 10 characters\n";
+                    continue;
+                }
+                break;
+            }
             cin.sync();
             ofstream userFile(checkUser.c_str());
             std::cout << "\nEnter you credential\n";
