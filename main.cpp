@@ -11,7 +11,7 @@ public:
     void options(string username);
     void printInfo(string username);
     void changeCredential(string username);
-    void changeUserPass(void);
+    void changeUserPass(string username);
     void dltAcc(string username);
 };
 
@@ -77,9 +77,69 @@ void features::changeCredential(string username)
     }
 }
 
-void features::changeUserPass()
+void features::changeUserPass(string username)
 {
-    std::cout << "Under construction\n";
+    string NewUserName, NewPassword, shift, shift1;
+    ifstream Check;
+    while (true)
+    {
+        std::cout << "Enter your new username: ";
+        std::getline(std::cin, NewUserName);
+        cin.sync();
+        Check.open((NewUserName + ".txt").c_str());
+        if (Check.is_open())
+        {
+            cout << "\nUser name already exsits\nPlease enter a different username\n\n";
+            Check.close();
+            continue;
+        }
+
+        if (NewUserName.size() < 5 || NewUserName.size() > 14)
+        {
+            std::cout << "\nYour Username must be under 5 to 14 characters\n\n";
+            Check.close();
+            continue;
+        }
+
+        std::cout << "Enter your new password: ";
+        std::cin >> NewPassword;
+        if (NewPassword.size() < 4 || NewPassword.size() > 10)
+        {
+            cout << "\nYour Password must be under 4 to 10 characters\n";
+            Check.close();
+            continue;
+        }
+        Check.close();
+        break;
+    }
+
+    rename((username + ".txt").c_str(), (NewUserName + ".txt").c_str());
+    ifstream convert((NewUserName + ".txt").c_str());
+    if (convert.is_open())
+    {
+        getline(convert, shift);
+        getline(convert, shift1);
+        convert.close();
+    }
+    else
+    {
+        cout << "\nSomething went wrond\n";
+    }
+
+    ofstream Write((NewUserName + ".txt").c_str());
+    if (Write.is_open())
+    {
+        Write << shift << endl;
+        Write << shift1 << endl;
+        Write <<"User Name: "<< NewUserName << endl;
+        Write << "Password: "<<NewPassword;
+        Write.close();
+    }
+    else
+    {
+        cout << "\nSomething went wrond\n";
+    }
+    cout<<"\nYour username and password is successfully changed\nNow Login with you new username and password to access the file\n";
 }
 
 void features::dltAcc(string username)
@@ -118,8 +178,8 @@ void features::options(string username)
             changeCredential(username);
             break;
         case '3':
-            changeUserPass();
-            break;
+            changeUserPass(username);
+            return;
         case '4':
             std::cout << "\nLogout successfully!!\n";
             return;
