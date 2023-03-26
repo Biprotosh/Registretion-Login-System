@@ -292,11 +292,11 @@ void login()
     std::cout << "Enter your username: ";
     std::getline(std::cin, username);
     cin.sync();
-    cin.ignore();
+   
     std::cout << "Enter your password: ";
     getline(std::cin, password);
     cin.sync();
-    cin.ignore();
+    
 
     if (checkCredentials(username, password))
     {
