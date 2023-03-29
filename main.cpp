@@ -238,7 +238,7 @@ void registerUser()
             std::cout << "\nEnter you credential\n";
             std::cout << "--------------------\n";
             std::cout << "Name: ";
-            std::getline(std::cin, name);
+            std::getline(std::cin>>ws, name);
             cin.sync();
             std::cout << "Phone-Number: ";
             std::cin >> phN;
@@ -290,7 +290,7 @@ void login()
     string username, password;
 
     std::cout << "Enter your username: ";
-    std::getline(std::cin, username);
+    std::getline(std::cin>>ws, username);
     cin.sync();
     std::cout << "Enter your password: ";
     std::cin >> password;
