@@ -255,7 +255,7 @@ void registerUser()
         }
         else
         {
-            std::cout << "Something went wrong\n";
+            std::cout << "Something went wrong :)\n";
             check.close();
             exit(1);
         }
